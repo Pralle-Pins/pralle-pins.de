@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pralle Pins – Kegelclub vom Niederrhein</title>
+<meta name="description" content="Pralle Pins – der Kegelclub vom Niederrhein. Gut Holz!">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  @font-face{font-family:Anton;src:url(anton-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+  @font-face{font-family:Inter;src:url(inter-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+  @font-face{font-family:Inter;src:url(inter-latin-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+  @font-face{font-family:Inter;src:url(inter-latin-800-normal.woff2) format("woff2");font-weight:800;font-display:swap}
+  :root{
+    --ink:#0b0b0d; --paper:#f4f1ea; --acc:#ff3b1f; --acc2:#ffd400; --mute:#8a8a90;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;background:var(--ink);color:var(--paper);line-height:1.5;overflow-x:hidden}
+  a{color:inherit}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+
+  /* NAV */
+  nav{position:fixed;inset:0 0 auto 0;z-index:10;backdrop-filter:blur(10px);background:rgba(11,11,13,.7);border-bottom:1px solid rgba(255,255,255,.08)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:Anton,sans-serif;font-size:22px;letter-spacing:.04em;text-transform:uppercase}
+  .brand img{height:36px;width:auto}
+  nav ul{display:flex;gap:28px;list-style:none}
+  nav ul a{text-decoration:none;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.08em;opacity:.8}
+  nav ul a:hover{opacity:1;color:var(--acc2)}
+  @media(max-width:700px){nav ul{display:none}}
+
+  /* HERO */
+  .hero{min-height:100vh;display:grid;align-items:center;position:relative;padding:120px 0 80px;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;background:
+     radial-gradient(60% 50% at 80% 30%,rgba(255,59,31,.35),transparent 70%),
+     radial-gradient(40% 40% at 10% 90%,rgba(255,212,0,.18),transparent 70%)}
+  .hero .wrap{position:relative;display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+  @media(max-width:900px){.hero .wrap{grid-template-columns:1fr}}
+  .kicker{display:inline-block;font-weight:800;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);background:var(--acc2);padding:6px 12px;transform:skew(-10deg)}
+  h1{font-family:Anton,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(72px,14vw,190px);line-height:.85;margin:24px 0;letter-spacing:-.01em}
+  h1 .out{color:transparent;-webkit-text-stroke:2px var(--paper)}
+  h1 .hot{color:var(--acc)}
+  .lead{font-size:clamp(18px,2vw,22px);max-width:34ch;opacity:.85}
+  .cta{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+  .btn{display:inline-block;text-decoration:none;font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:14px;padding:16px 28px;border:2px solid var(--paper);transition:.2s}
+  .btn.primary{background:var(--acc);border-color:var(--acc)}
+  .btn:hover{transform:translateY(-2px);box-shadow:6px 6px 0 var(--acc2)}
+
+  /* Pins graphic */
+  .pins{display:flex;justify-content:center}
+  .pins svg{width:min(420px,90%);filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))}
+  .pin{transform-origin:50% 100%;animation:wobble 3s ease-in-out infinite}
+  .pin:nth-child(2){animation-delay:.3s}.pin:nth-child(3){animation-delay:.6s}
+  .pin:nth-child(4){animation-delay:.15s}.pin:nth-child(5){animation-delay:.45s}
+  @keyframes wobble{0%,100%{transform:rotate(0)}50%{transform:rotate(2.5deg)}}
+  .ball{animation:roll 4s cubic-bezier(.5,0,.3,1) infinite}
+  @keyframes roll{0%{transform:translateX(-260px) rotate(-360deg);opacity:0}15%{opacity:1}60%,100%{transform:translateX(0) rotate(0);opacity:1}}
+
+  /* TICKER */
+  .ticker{background:var(--acc);color:var(--ink);overflow:hidden;white-space:nowrap;padding:14px 0;transform:rotate(-1.5deg);margin:-10px -20px 0}
+  .ticker span{display:inline-block;font-family:Anton,sans-serif;font-size:28px;text-transform:uppercase;animation:tick 25s linear infinite;padding-right:40px}
+  @keyframes tick{to{transform:translateX(-50%)}}
+
+  /* SECTIONS */
+  section{padding:120px 0}
+  h2{font-family:Anton,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(48px,7vw,96px);line-height:.9;margin-bottom:28px}
+  h2 em{font-style:normal;color:var(--acc2)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+  @media(max-width:900px){.grid2{grid-template-columns:1fr}}
+  p.big{font-size:20px;opacity:.85;margin-bottom:18px}
+
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.1)}
+  .stat{background:var(--ink);padding:32px 24px}
+  .stat b{display:block;font-family:Anton,sans-serif;font-size:72px;line-height:1;color:var(--acc)}
+  .stat span{text-transform:uppercase;font-weight:600;letter-spacing:.1em;font-size:13px;opacity:.7}
+  @media(max-width:600px){.stats{grid-template-columns:1fr}}
+
+  /* LIGHT SECTION */
+  .light{background:var(--paper);color:var(--ink)}
+  .light h2 em{color:var(--acc)}
+  .events{display:grid;gap:16px}
+  .event{display:grid;grid-template-columns:140px 1fr auto;gap:24px;align-items:center;padding:28px;border:3px solid var(--ink);background:#fff;transition:.2s}
+  .event:hover{transform:translate(-4px,-4px);box-shadow:8px 8px 0 var(--ink)}
+  .event .date{font-family:Anton,sans-serif;font-size:34px;line-height:1;text-transform:uppercase}
+  .event .date small{display:block;font-family:Inter;font-weight:800;font-size:12px;letter-spacing:.15em;color:var(--acc)}
+  .event h3{font-size:22px;font-weight:800;text-transform:uppercase}
+  .event p{opacity:.7}
+  .tag{font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.1em;background:var(--acc2);padding:6px 10px}
+  @media(max-width:700px){.event{grid-template-columns:1fr}}
+
+  /* RULES */
+  .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;counter-reset:r}
+  .rule{border-top:4px solid var(--acc);padding-top:20px}
+  .rule::before{counter-increment:r;content:"§" counter(r);font-family:Anton,sans-serif;font-size:40px;color:var(--acc2);display:block}
+  .rule h3{text-transform:uppercase;font-size:18px;margin:6px 0}
+  .rule p{opacity:.75}
+
+  /* FOOTER */
+  footer{border-top:1px solid rgba(255,255,255,.1);padding:60px 0 40px}
+  footer .wrap{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+  footer .gh{font-family:Anton,sans-serif;font-size:clamp(40px,8vw,110px);text-transform:uppercase;line-height:.85;color:transparent;-webkit-text-stroke:1.5px rgba(244,241,234,.5)}
+  footer small{opacity:.6}
+  footer small a{opacity:1}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:.8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="brand"><img src="logo.svg" alt="Pralle Pins Logo"> Pralle Pins</a>
+    <ul>
+      <li><a href="#club">Der Club</a></li>
+      <li><a href="#termine">Termine</a></li>
+      <li><a href="#regeln">Regeln</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="kicker">Kegelclub · Niederrhein</span>
+      <h1>Pralle<br><span class="out">Pins</span><span class="hot">.</span></h1>
+      <p class="lead">Neun Pins, eine Kugel, null Ausreden. Wir kegeln, wir feiern, wir fahren zusammen weg. Gut Holz!</p>
+      <div class="cta">
+        <a href="#termine" class="btn primary">Nächste Termine</a>
+        <a href="#club" class="btn">Wer wir sind</a>
+      </div>
+    </div>
+    <div class="pins" aria-hidden="true">
+      <svg viewBox="0 0 400 360">
+        <defs>
+          <linearGradient id="pg" x1="0" x2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#d9d4c7"/></linearGradient>
+          <g id="p">
+            <path d="M20 0c11 0 16 12 14 26-2 12-8 18-8 28 0 12 18 34 18 62 0 26-10 44-24 44S-4 142-4 116c0-28 18-50 18-62 0-10-6-16-8-28C4 12 9 0 20 0z" fill="url(#pg)"/>
+            <rect x="8" y="44" width="24" height="5" fill="#ff3b1f"/><rect x="7" y="53" width="26" height="5" fill="#ff3b1f"/>
+          </g>
+        </defs>
+        <g class="pin" style="transform-box:fill-box"><use href="#p" x="180" y="20"/></g>
+        <g class="pin" style="transform-box:fill-box"><use href="#p" x="120" y="60"/></g>
+        <g class="pin" style="transform-box:fill-box"><use href="#p" x="240" y="60"/></g>
+        <g class="pin" style="transform-box:fill-box"><use href="#p" x="60" y="110"/></g>
+        <g class="pin" style="transform-box:fill-box"><use href="#p" x="300" y="110"/></g>
+        <g class="pin" style="transform-box:fill-box"><use href="#p" x="180" y="120"/></g>
+        <ellipse cx="200" cy="350" rx="170" ry="8" fill="rgba(0,0,0,.4)"/>
+        <g class="ball" style="transform-box:fill-box;transform-origin:center">
+          <circle cx="200" cy="300" r="44" fill="#ffd400"/>
+          <circle cx="188" cy="284" r="6" fill="#0b0b0d"/><circle cx="206" cy="280" r="6" fill="#0b0b0d"/><circle cx="200" cy="298" r="6" fill="#0b0b0d"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-hidden="true"><span>Gut Holz ✦ Alle Neune ✦ Pralle Pins ✦ Niederrhein ✦ Kranz ✦ Pudel zahlt ✦ Gut Holz ✦ Alle Neune ✦ Pralle Pins ✦ Niederrhein ✦ Kranz ✦ Pudel zahlt ✦ </span></div>
+
+<section id="club">
+  <div class="wrap grid2">
+    <div class="reveal">
+      <h2>Mehr als<br><em>nur Kegeln.</em></h2>
+      <p class="big">Die Pralle Pins sind eine Truppe vom Niederrhein, die seit Jahren zusammen auf der Bahn steht – und danach meistens noch an der Theke.</p>
+      <p class="big">Kegelabende, Touren, Skifahrten: Bei uns zählt der Wurf genauso wie die Runde danach. Inzwischen haben wir sogar eine Außenstelle in Australien.</p>
+    </div>
+    <div class="stats reveal">
+      <div class="stat"><b>9</b><span>Pins</span></div>
+      <div class="stat"><b>1</b><span>Kugel</span></div>
+      <div class="stat"><b>0</b><span>Ausreden</span></div>
+      <div class="stat"><b>∞</b><span>Runden</span></div>
+      <div class="stat"><b>2</b><span>Kontinente</span></div>
+      <div class="stat"><b>1</b><span>Club</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="termine" class="light">
+  <div class="wrap">
+    <h2 class="reveal">Was <em>ansteht.</em></h2>
+    <div class="events">
+      <div class="event reveal">
+        <div class="date"><small>Januar 2027</small>21.–25.</div>
+        <div><h3>Skitour Kleinwalsertal</h3><p>Riezlern – Pisten tagsüber, Hüttenzauber abends.</p></div>
+        <span class="tag">Tour</span>
+      </div>
+      <div class="event reveal">
+        <div class="date"><small>Regelmäßig</small>Kegeln</div>
+        <div><h3>Kegelabend</h3><p>Termine und Bahn stimmen wir in der Gruppe ab.</p></div>
+        <span class="tag">Bahn</span>
+      </div>
+      <div class="event reveal">
+        <div class="date"><small>2027</small>Tba</div>
+        <div><h3>Kegeltour</h3><p>Ziel wird noch ausgekegelt.</p></div>
+        <span class="tag">Tour</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="regeln">
+  <div class="wrap">
+    <h2 class="reveal">Die <em>Club&shy;regeln.</em></h2>
+    <div class="rules">
+      <div class="rule reveal"><h3>Gut Holz</h3><p>Wird gesagt. Immer. Vor jedem Wurf, nach jedem Wurf.</p></div>
+      <div class="rule reveal"><h3>Pudel zahlt</h3><p>Wer in die Rinne wirft, füllt die Kasse. Keine Diskussion.</p></div>
+      <div class="rule reveal"><h3>Alle Neune</h3><p>…wird gefeiert, als wär's die Meisterschaft.</p></div>
+      <div class="rule reveal"><h3>Tour ist Pflicht</h3><p>Was auf Tour passiert, bleibt auf Tour.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="gh">Gut Holz!</div>
+    <small>© <span id="y"></span> Pralle Pins · <a href="impressum.html">Impressum &amp; Datenschutz</a></small>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('y').textContent=new Date().getFullYear();
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
