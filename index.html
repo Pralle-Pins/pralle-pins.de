@@ -24,7 +24,7 @@
   nav{position:fixed;inset:0 0 auto 0;z-index:10;backdrop-filter:blur(10px);background:rgba(11,11,13,.7);border-bottom:1px solid rgba(255,255,255,.08)}
   nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
   .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:Anton,sans-serif;font-size:22px;letter-spacing:.04em;text-transform:uppercase}
-  .brand img{height:36px;width:auto}
+  .brand img{height:40px;width:auto;display:block}
   nav ul{display:flex;gap:28px;list-style:none}
   nav ul a{text-decoration:none;font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.08em;opacity:.8}
   nav ul a:hover{opacity:1;color:var(--acc2)}
@@ -49,7 +49,8 @@
 
   /* Pins graphic */
   .pins{display:flex;justify-content:center}
-  .pins svg{width:min(420px,90%);filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))}
+  .biglogo{width:min(480px,95%);filter:drop-shadow(0 30px 40px rgba(0,0,0,.5));animation:float 5s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-14px) rotate(1deg)}}
   .pin{transform-origin:50% 100%;animation:wobble 3s ease-in-out infinite}
   .pin:nth-child(2){animation-delay:.3s}.pin:nth-child(3){animation-delay:.6s}
   .pin:nth-child(4){animation-delay:.15s}.pin:nth-child(5){animation-delay:.45s}
@@ -112,7 +113,7 @@
 
 <nav>
   <div class="wrap">
-    <a href="#" class="brand"><img src="logo.svg" alt="Pralle Pins Logo"> Pralle Pins</a>
+    <a href="#" class="brand"><img src="logo.svg" alt="Pralle Pins"></a>
     <ul>
       <li><a href="#club">Der Club</a></li>
       <li><a href="#termine">Termine</a></li>
@@ -132,27 +133,8 @@
         <a href="#club" class="btn">Wer wir sind</a>
       </div>
     </div>
-    <div class="pins" aria-hidden="true">
-      <svg viewBox="0 0 400 360">
-        <defs>
-          <linearGradient id="pg" x1="0" x2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#d9d4c7"/></linearGradient>
-          <g id="p">
-            <path d="M20 0c11 0 16 12 14 26-2 12-8 18-8 28 0 12 18 34 18 62 0 26-10 44-24 44S-4 142-4 116c0-28 18-50 18-62 0-10-6-16-8-28C4 12 9 0 20 0z" fill="url(#pg)"/>
-            <rect x="8" y="44" width="24" height="5" fill="#ff3b1f"/><rect x="7" y="53" width="26" height="5" fill="#ff3b1f"/>
-          </g>
-        </defs>
-        <g class="pin" style="transform-box:fill-box"><use href="#p" x="180" y="20"/></g>
-        <g class="pin" style="transform-box:fill-box"><use href="#p" x="120" y="60"/></g>
-        <g class="pin" style="transform-box:fill-box"><use href="#p" x="240" y="60"/></g>
-        <g class="pin" style="transform-box:fill-box"><use href="#p" x="60" y="110"/></g>
-        <g class="pin" style="transform-box:fill-box"><use href="#p" x="300" y="110"/></g>
-        <g class="pin" style="transform-box:fill-box"><use href="#p" x="180" y="120"/></g>
-        <ellipse cx="200" cy="350" rx="170" ry="8" fill="rgba(0,0,0,.4)"/>
-        <g class="ball" style="transform-box:fill-box;transform-origin:center">
-          <circle cx="200" cy="300" r="44" fill="#ffd400"/>
-          <circle cx="188" cy="284" r="6" fill="#0b0b0d"/><circle cx="206" cy="280" r="6" fill="#0b0b0d"/><circle cx="200" cy="298" r="6" fill="#0b0b0d"/>
-        </g>
-      </svg>
+    <div class="pins">
+      <img class="biglogo" src="logo.svg" alt="Pralle Pins Logo">
     </div>
   </div>
 </header>
