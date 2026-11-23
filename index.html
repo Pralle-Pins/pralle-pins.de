@@ -104,6 +104,20 @@
   footer small{opacity:.6}
   footer small a{opacity:1}
 
+
+  /* KADER */
+  .squad{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:22px;margin-top:40px}
+  .jersey{position:relative;aspect-ratio:200/210;transition:.25s}
+  .jersey svg{width:100%;height:100%;display:block}
+  .jersey svg path:first-child{fill:#f4f1ea}
+  .jersey .str{stroke:var(--acc);stroke-width:5;fill:none}
+  .jersey:nth-child(even) svg path:first-child{fill:#0070b8}
+  .jersey:nth-child(even) .str{stroke:#f4f1ea}
+  .jersey:nth-child(even) .nr,.jersey:nth-child(even) .nm{color:#f4f1ea}
+  .jersey .nr{position:absolute;left:0;right:0;top:34%;text-align:center;font-family:Anton,sans-serif;font-size:clamp(40px,5vw,64px);line-height:1;color:var(--ink)}
+  .jersey .nm{position:absolute;left:0;right:0;top:18%;text-align:center;font-family:Anton,sans-serif;font-size:clamp(14px,1.6vw,19px);letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+  .jersey:hover{transform:translateY(-6px) rotate(-2deg)}
+
   .reveal{opacity:0;transform:translateY(30px);transition:.8s cubic-bezier(.2,.7,.2,1)}
   .reveal.in{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
@@ -116,6 +130,7 @@
     <a href="#" class="brand"><img src="logo.svg" alt="Pralle Pins"></a>
     <ul>
       <li><a href="#club">Der Club</a></li>
+      <li><a href="#kader">Kader</a></li>
       <li><a href="#termine">Termine</a></li>
       <li><a href="#regeln">Regeln</a></li>
     </ul>
@@ -155,6 +170,32 @@
       <div class="stat"><b>∞</b><span>Runden</span></div>
       <div class="stat"><b>2</b><span>Kontinente</span></div>
       <div class="stat"><b>1</b><span>Club</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="kader">
+  <div class="wrap">
+    <h2 class="reveal">Der <em>Kader.</em></h2>
+    <p class="big reveal">17 Kegelbrüder, ein Trikot. Hier sind sie – mit Rückennummer und Kegelnamen.</p>
+    <div class="squad">
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">1</span><span class="nm">Boom</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">2</span><span class="nm">Drötti</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">3</span><span class="nm">Flixo</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">4</span><span class="nm">Heymi</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">5</span><span class="nm">Kiesi</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">6</span><span class="nm">Pazze</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">7</span><span class="nm">Tobi</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">8</span><span class="nm">Pippo</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">9</span><span class="nm">Schep</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">10</span><span class="nm">Totti</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">11</span><span class="nm">Andi</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">12</span><span class="nm">Dave</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">13</span><span class="nm">Hen</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">14</span><span class="nm">Stevo</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">15</span><span class="nm">Timmey</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">16</span><span class="nm">Peter</span></div>
+      <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">18</span><span class="nm">Mike</span></div>
     </div>
   </div>
 </section>
