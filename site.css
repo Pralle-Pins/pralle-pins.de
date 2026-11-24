@@ -123,3 +123,10 @@
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 
   body,nav,.light,.event,.stat,.next,.countdown div,.ticker,.btn{transition:background-color .4s,color .4s,border-color .4s}
+
+  /* GALERIE (Grundlayout, Designs dürfen es umgestalten) */
+  .gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px;margin-top:40px}
+  .shot{margin:0;position:relative;overflow:hidden;background:var(--line)}
+  .shot img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+  .shot figcaption{padding:12px 4px 0;font-weight:600}
+  .shot figcaption b{display:block;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-2)}

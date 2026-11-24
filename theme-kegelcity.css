@@ -1,0 +1,108 @@
+/* =========================================================================
+   Pralle Pins – Design "Kegel City" (ENTWURF)
+   -------------------------------------------------------------------------
+   Open-World-Game-Look: Sonnenuntergang über der Stadt, Neon-Pink/Orange/
+   Gelb auf Nachtviolett, schräge Ladebildschirm-Kacheln mit dicken Rahmen.
+   Eigener Stil – keine fremden Logos, Namen oder Schriften.
+   Alles auf [data-theme="kegelcity"] begrenzt.
+   ========================================================================= */
+
+[data-theme="kegelcity"] {
+  --kc-night: #170a2b;  --kc-plum: #3a1452;  --kc-pink: #ff2e88;
+  --kc-orange: #ff8a3d; --kc-sun: #ffd166;   --kc-teal: #19d3c5;
+  --kc-ink: #0a0410;
+  --kc-sunset: linear-gradient(180deg, var(--kc-sun) 0%, var(--kc-orange) 38%, var(--kc-pink) 72%, #b42fd0 100%);
+
+  --bg: var(--kc-night);    --fg: #fff4ea;
+  --nav-bg: rgba(23,10,43,.8);
+  --line: rgba(255,46,136,.25);
+  --accent: var(--kc-pink); --on-accent: var(--kc-ink); --btn-fg: var(--kc-ink);
+  --accent-2: var(--kc-sun); --on-accent-2: var(--kc-ink);
+  --glow-1: rgba(255,46,136,.45); --glow-2: rgba(25,211,197,.3);
+  --logo: #fff4ea;
+  --outline: var(--kc-sun); --footer-outline: rgba(255,209,102,.6);
+  --surface: var(--kc-plum); --on-surface: #fff4ea; --surface-accent: var(--kc-teal);
+  --card: var(--kc-night);  --card-line: var(--kc-ink);
+  --next-bg: var(--kc-ink); --on-next: #fff4ea;     --next-blob: var(--kc-orange);
+  --count-bg: var(--kc-sun); --on-count: var(--kc-ink);
+  --jersey-a: var(--kc-pink); --on-jersey-a: var(--kc-ink); --stripe-a: var(--kc-sun);
+  --jersey-b: var(--kc-teal); --on-jersey-b: var(--kc-ink); --stripe-b: var(--kc-plum);
+  --shadow: rgba(0,0,0,.6);
+}
+
+/* ---------- Typo: fett, kursiv, Sonnenuntergang im Buchstaben ---------- */
+[data-theme="kegelcity"] h1,
+[data-theme="kegelcity"] h2 { font-style: italic; letter-spacing: .01em; }
+[data-theme="kegelcity"] h1 {
+  background: var(--kc-sunset); -webkit-background-clip: text; background-clip: text; color: transparent;
+  -webkit-text-stroke: 3px var(--kc-ink); paint-order: stroke fill;
+  filter: drop-shadow(6px 6px 0 var(--kc-ink));
+}
+[data-theme="kegelcity"] h1 .out { -webkit-text-stroke: 3px var(--kc-ink); color: transparent; }
+[data-theme="kegelcity"] h1 .hot { color: var(--kc-teal); -webkit-text-fill-color: var(--kc-teal); }
+[data-theme="kegelcity"] h2 { text-shadow: 4px 4px 0 var(--kc-ink); }
+[data-theme="kegelcity"] h2 em { color: var(--kc-pink); }
+
+/* ---------- Hero: Himmel + gestreifte Sonne ---------- */
+[data-theme="kegelcity"] .hero::before {
+  background:
+    radial-gradient(60% 40% at 50% 100%, rgba(255,46,136,.55), transparent 70%),
+    linear-gradient(180deg, #170a2b 0%, #3a1452 45%, #a12a74 75%, #ff8a3d 100%);
+}
+[data-theme="kegelcity"] .hero::after {
+  content: ""; position: absolute; right: 6%; bottom: 14%; width: min(46vw, 520px); aspect-ratio: 1;
+  border-radius: 50%; background: var(--kc-sunset); opacity: .9;
+  -webkit-mask: repeating-linear-gradient(180deg, #000 0 14px, transparent 14px 20px) bottom / 100% 45% no-repeat,
+                linear-gradient(#000, #000) top / 100% 55% no-repeat;
+          mask: repeating-linear-gradient(180deg, #000 0 14px, transparent 14px 20px) bottom / 100% 45% no-repeat,
+                linear-gradient(#000, #000) top / 100% 55% no-repeat;
+}
+[data-theme="kegelcity"] .hero .wrap { z-index: 1; }
+[data-theme="kegelcity"] .kicker { background: var(--kc-teal); color: var(--kc-ink); }
+[data-theme="kegelcity"] .biglogo { filter: drop-shadow(6px 6px 0 var(--kc-ink)) drop-shadow(0 20px 40px rgba(0,0,0,.5)); }
+
+[data-theme="kegelcity"] .btn { transform: skew(-8deg); border: 3px solid var(--kc-ink); background: #fff4ea; color: var(--kc-ink); box-shadow: 5px 5px 0 var(--kc-ink); }
+[data-theme="kegelcity"] .btn.primary { background: var(--kc-sun); border-color: var(--kc-ink); }
+[data-theme="kegelcity"] .btn:hover { transform: skew(-8deg) translate(-2px,-2px); box-shadow: 8px 8px 0 var(--kc-pink); }
+
+[data-theme="kegelcity"] .ticker { background: var(--kc-pink); border-block: 4px solid var(--kc-ink); }
+
+/* ---------- Galerie: Ladebildschirm-Collage ---------- */
+[data-theme="kegelcity"] #galerie { background: radial-gradient(70% 60% at 50% 0%, rgba(255,46,136,.25), transparent 70%), var(--kc-night); }
+[data-theme="kegelcity"] .gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; align-items: center; padding: 20px 0 40px; }
+[data-theme="kegelcity"] .shot {
+  border: 6px solid var(--kc-ink); outline: 4px solid #fff4ea; outline-offset: -10px;
+  box-shadow: 12px 12px 0 var(--kc-ink); background: var(--kc-ink); transition: transform .3s;
+}
+[data-theme="kegelcity"] .gallery .shot-1 { transform: rotate(-4deg) translateX(18px); z-index: 1; }
+[data-theme="kegelcity"] .gallery .shot-2 { transform: rotate(2deg) scale(1.04); z-index: 2; }
+[data-theme="kegelcity"] .gallery .shot-4 { transform: rotate(-3deg) translate(-30px, 10px); z-index: 2; }
+[data-theme="kegelcity"] .gallery .shot-3 { transform: rotate(5deg) translateX(-14px); z-index: 1; }
+[data-theme="kegelcity"] .gallery .shot:hover { transform: rotate(0) scale(1.06); z-index: 3; }
+[data-theme="kegelcity"] .shot img { filter: saturate(1.25) contrast(1.08); }
+[data-theme="kegelcity"] .shot::after {   /* Abendlicht über dem Foto */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(160deg, rgba(255,209,102,.18), transparent 40%, rgba(255,46,136,.28));
+  mix-blend-mode: screen;
+}
+[data-theme="kegelcity"] .shot figcaption {
+  position: absolute; left: 14px; bottom: 14px; right: 14px; z-index: 1;
+  padding: 8px 12px; background: var(--kc-ink); color: #fff4ea;
+  font-family: Anton, sans-serif; font-style: italic; font-weight: 400; font-size: 22px; line-height: 1.05; text-transform: uppercase;
+}
+[data-theme="kegelcity"] .shot figcaption b { color: var(--kc-sun); font-family: Inter, sans-serif; font-style: normal; font-weight: 800; font-size: 11px; }
+@media (max-width: 1000px) {
+  [data-theme="kegelcity"] .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+  [data-theme="kegelcity"] .gallery .shot-1, [data-theme="kegelcity"] .gallery .shot-3 { transform: rotate(-2deg); }
+  [data-theme="kegelcity"] .gallery .shot-2, [data-theme="kegelcity"] .gallery .shot-4 { transform: rotate(2deg); }
+}
+@media (max-width: 560px) { [data-theme="kegelcity"] .gallery { grid-template-columns: 1fr; } }
+
+/* ---------- Rest ---------- */
+[data-theme="kegelcity"] .stat b { color: var(--kc-pink); text-shadow: 3px 3px 0 var(--kc-ink); }
+[data-theme="kegelcity"] .event { border-width: 4px; box-shadow: 8px 8px 0 var(--kc-pink); }
+[data-theme="kegelcity"] .next { border: 4px solid var(--kc-pink); box-shadow: 10px 10px 0 var(--kc-orange); }
+[data-theme="kegelcity"] .countdown div { border: 3px solid var(--kc-ink); transform: skew(-6deg); }
+[data-theme="kegelcity"] .rule { border-top-color: var(--kc-teal); }
+[data-theme="kegelcity"] footer { background: var(--kc-sunset); color: var(--kc-ink); border: 0; }
+[data-theme="kegelcity"] footer .gh { color: var(--kc-ink); -webkit-text-stroke: 0; font-style: italic; }

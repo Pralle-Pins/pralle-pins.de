@@ -7,16 +7,17 @@
 <meta name="description" content="Pralle Pins – der Kegelclub vom Niederrhein. Gut Holz!">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <script>/* Design vor dem ersten Zeichnen setzen (kein Flackern) */
-try{var t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('pp-theme');if(t==='original'||t==='rheinblau')document.documentElement.dataset.theme=t}catch(e){}</script>
+try{var t=new URLSearchParams(location.search).get('theme')||localStorage.getItem('pp-theme');if(['original','rheinblau','kegelcity'].includes(t))document.documentElement.dataset.theme=t}catch(e){}</script>
 <link rel="stylesheet" href="theme-original.css">
 <link rel="stylesheet" href="theme-rheinblau.css">
+<link rel="stylesheet" href="theme-kegelcity.css">
 <link rel="stylesheet" href="site.css">
 <link rel="stylesheet" href="logo.css">
 <script src="theme-switcher.js" defer></script>
 </head>
 <body>
 
-<theme-switcher class="theme-bar" themes="original:Original,rheinblau:Rheinblau"></theme-switcher>
+<theme-switcher class="theme-bar" themes="original:Original,rheinblau:Rheinblau,kegelcity:Kegel City"></theme-switcher>
 <nav>
   <div class="wrap">
     <a href="#" class="brand"><svg class="pp-logo" data-anim="wobble" viewBox="109.7 128 188 128" role="img" aria-label="Pralle Pins" xmlns="http://www.w3.org/2000/svg">
@@ -33,6 +34,7 @@ try{var t=new URLSearchParams(location.search).get('theme')||localStorage.getIte
     <ul>
       <li><a href="#club">Der Club</a></li>
       <li><a href="#kader">Kader</a></li>
+      <li><a href="#galerie">Galerie</a></li>
       <li><a href="#termine">Termine</a></li>
       <li><a href="#regeln">Regeln</a></li>
     </ul>
@@ -108,6 +110,18 @@ try{var t=new URLSearchParams(location.search).get('theme')||localStorage.getIte
       <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">15</span><span class="nm">Timmey</span></div>
       <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">16</span><span class="nm">Peter</span></div>
       <div class="jersey reveal"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">18</span><span class="nm">Mike</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="galerie">
+  <div class="wrap">
+    <h2 class="reveal">Aus dem <em>Archiv.</em></h2>
+    <div class="gallery">
+      <figure class="shot shot-1 reveal"><img src="galerie-shots.jpg" alt="Tablett mit Schnäpsen und Sahnehaube" loading="lazy"><figcaption><b>Mission 1</b>Die Sahnehauben-Runde</figcaption></figure>
+      <figure class="shot shot-2 reveal"><img src="galerie-maske.jpg" alt="Kegelbruder im Trikot trinkt Bier mit Maske über den Augen" loading="lazy"><figcaption><b>Mission 2</b>Blind getrunken</figcaption></figure>
+      <figure class="shot shot-3 reveal"><img src="galerie-ski.jpg" alt="Kegelbruder mit Daumen hoch vor verschneiten Bergen" loading="lazy"><figcaption><b>Mission 3</b>Skitour: Daumen hoch</figcaption></figure>
+      <figure class="shot shot-4 reveal"><img src="galerie-gipfel.jpg" alt="Zwei Kegelbrüder von hinten vor einem verschneiten Gipfel" loading="lazy"><figcaption><b>Mission 4</b>Gipfelblick mit Rückendeckung</figcaption></figure>
     </div>
   </div>
 </section>
