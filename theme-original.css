@@ -1,0 +1,30 @@
+/* =========================================================================
+   Pralle Pins – Design "Original" (Standard)
+   -------------------------------------------------------------------------
+   Jedes Design ist EINE Datei: theme-<name>.css
+     - Pflicht: Farb-Tokens unter [data-theme="<name>"]
+     - Optional: eigene Formen/Typo, ebenfalls nur unter [data-theme="<name>"]
+   site.css (Grundlayout) kennt keine Farben, nur die Tokens.
+   Neues Design: Datei anlegen, im <head> verlinken, im
+   <theme-switcher themes="..."> eintragen. Fertig.
+   ========================================================================= */
+
+/* ---------- 1) Original: Schwarz / Rot / Gelb (Standard) ---------- */
+:root,
+[data-theme="original"] {
+  --bg: #0b0b0d;          --fg: #f4f1ea;
+  --nav-bg: rgba(11,11,13,.72);
+  --line: rgba(255,255,255,.12);
+  --accent: #ff3b1f;      --on-accent: #0b0b0d;   --btn-fg: #f4f1ea;
+  --accent-2: #ffd400;    --on-accent-2: #0b0b0d;
+  --glow-1: rgba(255,59,31,.35);  --glow-2: rgba(255,212,0,.18);
+  --logo: #f4f1ea;
+  --outline: #f4f1ea;     --footer-outline: rgba(244,241,234,.5);
+  --surface: #f4f1ea;     --on-surface: #0b0b0d;  --surface-accent: #ff3b1f;
+  --card: #ffffff;        --card-line: #0b0b0d;
+  --next-bg: #0b0b0d;     --on-next: #f4f1ea;     --next-blob: #ff3b1f;
+  --count-bg: #f4f1ea;    --on-count: #0b0b0d;
+  --jersey-a: #f4f1ea;    --on-jersey-a: #0b0b0d; --stripe-a: #ff3b1f;
+  --jersey-b: #0070b8;    --on-jersey-b: #f4f1ea; --stripe-b: #f4f1ea;
+  --shadow: rgba(0,0,0,.5);
+}

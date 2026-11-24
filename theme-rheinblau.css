@@ -1,0 +1,138 @@
+/* =========================================================================
+   Pralle Pins – Design "Rheinblau"
+   -------------------------------------------------------------------------
+   Hell, luftig, sportlich. Navy + Logo-Blau + Himmelblau + Mint-Akzent.
+   Neben den Farb-Tokens ändert dieses Design auch Formen und Typografie
+   (abgerundete Bento-Kacheln, Inter statt Anton, weiche Schatten).
+   ALLES ist auf [data-theme="rheinblau"] begrenzt – fällt die Datei weg,
+   ist die Seite wieder im Original.
+   ========================================================================= */
+
+[data-theme="rheinblau"] {
+  /* Palette (nur hier verwendet) */
+  --rb-navy: #0b1f3a;  --rb-blue: #0070b8;  --rb-sky: #4fb3ff;
+  --rb-ice: #eaf3fc;   --rb-mint: #2ad4a8;  --rb-paper: #f6f9fd;
+  --rb-radius: 28px;
+
+  /* Tokens für site.css */
+  --bg: var(--rb-paper);    --fg: var(--rb-navy);
+  --nav-bg: rgba(246,249,253,.82);
+  --line: rgba(11,31,58,.10);
+  --accent: var(--rb-blue); --on-accent: #fff;      --btn-fg: #fff;
+  --accent-2: var(--rb-mint); --on-accent-2: #052b23;
+  --glow-1: rgba(79,179,255,.55); --glow-2: rgba(42,212,168,.35);
+  --logo: var(--rb-blue);
+  --outline: var(--rb-sky); --footer-outline: rgba(255,255,255,.4);
+  --surface: #ffffff;       --on-surface: var(--rb-navy); --surface-accent: var(--rb-blue);
+  --card: var(--rb-paper);  --card-line: rgba(11,31,58,.08);
+  --next-bg: var(--rb-navy); --on-next: #fff;       --next-blob: var(--rb-sky);
+  --count-bg: rgba(255,255,255,.10); --on-count: #fff;
+  --jersey-a: var(--rb-blue); --on-jersey-a: #fff;  --stripe-a: #fff;
+  --jersey-b: var(--rb-navy); --on-jersey-b: #fff;  --stripe-b: var(--rb-sky);
+  --shadow: rgba(11,31,58,.16);
+}
+
+/* ---------- Typografie: modern, Groß-/Kleinschreibung ---------- */
+[data-theme="rheinblau"] h1,
+[data-theme="rheinblau"] h2,
+[data-theme="rheinblau"] h3.sub,
+[data-theme="rheinblau"] .brand {
+  font-family: Inter, system-ui, sans-serif; font-weight: 800;
+  text-transform: none; letter-spacing: -.045em;
+}
+[data-theme="rheinblau"] h2 { font-size: clamp(40px, 5.5vw, 72px); line-height: 1; }
+[data-theme="rheinblau"] h2 em { color: var(--rb-blue); }
+[data-theme="rheinblau"] h3.sub { font-size: 28px; }
+
+/* ---------- Navigation ---------- */
+[data-theme="rheinblau"] nav { border-bottom-color: transparent; box-shadow: 0 1px 0 var(--line); }
+[data-theme="rheinblau"] nav ul a { text-transform: none; letter-spacing: 0; font-size: 15px; }
+[data-theme="rheinblau"] nav ul a:hover { color: var(--rb-blue); }
+
+/* ---------- Hero: großes blaues Panel ---------- */
+[data-theme="rheinblau"] .hero { min-height: auto; padding: 96px 0 40px; }
+[data-theme="rheinblau"] .hero::before { display: none; }
+[data-theme="rheinblau"] .hero .wrap {
+  max-width: 1240px; padding: clamp(32px, 5vw, 72px);
+  border-radius: calc(var(--rb-radius) + 8px); color: #fff; overflow: hidden;
+  background:
+    radial-gradient(50% 70% at 85% 20%, var(--glow-1), transparent 70%),
+    radial-gradient(40% 50% at 5% 100%, var(--glow-2), transparent 70%),
+    linear-gradient(135deg, var(--rb-navy) 0%, var(--rb-blue) 100%);
+  box-shadow: 0 30px 60px -20px var(--shadow);
+}
+[data-theme="rheinblau"] .kicker {
+  transform: none; border-radius: 999px; padding: 8px 14px 8px 12px;
+  background: rgba(255,255,255,.12); color: #fff; letter-spacing: .08em; font-weight: 600;
+}
+[data-theme="rheinblau"] .kicker::before {
+  content: ""; display: inline-block; width: 8px; height: 8px; margin-right: 8px;
+  border-radius: 50%; background: var(--rb-mint); vertical-align: 1px;
+}
+[data-theme="rheinblau"] h1 { font-size: clamp(64px, 11vw, 150px); line-height: .9; margin: 22px 0; }
+[data-theme="rheinblau"] h1 .out { color: var(--rb-sky); -webkit-text-stroke: 0; }
+[data-theme="rheinblau"] h1 .hot { color: var(--rb-mint); }
+[data-theme="rheinblau"] .lead { opacity: .85; }
+[data-theme="rheinblau"] .hero .biglogo { color: #fff; filter: drop-shadow(0 24px 30px rgba(0,0,0,.25)); }
+
+/* Buttons: Pillen */
+[data-theme="rheinblau"] .btn {
+  border-radius: 999px; text-transform: none; letter-spacing: 0; font-size: 16px; padding: 15px 26px;
+  border-color: rgba(255,255,255,.5); color: #fff;
+}
+[data-theme="rheinblau"] .btn.primary { background: #fff; border-color: #fff; color: var(--rb-navy); }
+[data-theme="rheinblau"] .btn:hover { box-shadow: 0 10px 24px -8px rgba(0,0,0,.35); }
+
+/* Ticker: gerade Laufschrift-Leiste */
+[data-theme="rheinblau"] .ticker {
+  transform: none; margin: 0 auto; max-width: 1240px; border-radius: 999px;
+  background: var(--rb-ice); color: var(--rb-blue); padding: 12px 0;
+}
+[data-theme="rheinblau"] .ticker span { font-family: Inter, sans-serif; font-weight: 800; font-size: 18px; letter-spacing: -.01em; text-transform: none; }
+@media (max-width: 1290px) { [data-theme="rheinblau"] .ticker { margin: 0 24px; } }
+
+/* ---------- Sektionen ---------- */
+[data-theme="rheinblau"] section { padding: 96px 0; }
+[data-theme="rheinblau"] .stats { gap: 12px; background: none; border: 0; }
+[data-theme="rheinblau"] .stat { background: #fff; border-radius: 22px; box-shadow: 0 1px 0 var(--line), 0 12px 30px -18px var(--shadow); }
+[data-theme="rheinblau"] .stat:nth-child(1) { background: var(--rb-blue); color: #fff; }
+[data-theme="rheinblau"] .stat:nth-child(1) b { color: #fff; }
+[data-theme="rheinblau"] .stat:nth-child(5) { background: var(--rb-mint); color: var(--on-accent-2); }
+[data-theme="rheinblau"] .stat:nth-child(5) b { color: var(--on-accent-2); }
+[data-theme="rheinblau"] .stat b { font-family: Inter, sans-serif; font-weight: 800; letter-spacing: -.05em; font-size: 60px; }
+[data-theme="rheinblau"] .stat span { text-transform: none; letter-spacing: 0; font-size: 15px; }
+
+/* Kader: Trikots auf hellen Kacheln */
+[data-theme="rheinblau"] .squad { gap: 16px; }
+[data-theme="rheinblau"] .jersey { background: #fff; border-radius: 22px; padding: 14px; box-shadow: 0 12px 30px -20px var(--shadow); aspect-ratio: auto; }
+[data-theme="rheinblau"] .jersey .nm { top: calc(14px + 18%); }
+[data-theme="rheinblau"] .jersey .nr { top: calc(14px + 33%); }
+[data-theme="rheinblau"] .jersey:hover { transform: translateY(-6px); }
+
+/* Termine */
+[data-theme="rheinblau"] .light { background: var(--rb-ice); }
+[data-theme="rheinblau"] .next { border-radius: var(--rb-radius); background: linear-gradient(135deg, var(--rb-navy), #0d3a6e); }
+[data-theme="rheinblau"] .next small { color: var(--rb-mint); letter-spacing: .1em; }
+[data-theme="rheinblau"] .next-date { font-family: Inter, sans-serif; font-weight: 800; letter-spacing: -.04em; text-transform: none; }
+[data-theme="rheinblau"] .next h3 { text-transform: none; }
+[data-theme="rheinblau"] .countdown div { border-radius: 18px; border: 1px solid rgba(255,255,255,.14); }
+[data-theme="rheinblau"] .countdown b { font-family: Inter, sans-serif; font-weight: 800; letter-spacing: -.04em; }
+[data-theme="rheinblau"] .event { border: 0; border-radius: 22px; background: #fff; box-shadow: 0 12px 30px -20px var(--shadow); }
+[data-theme="rheinblau"] .event:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -20px var(--shadow); }
+[data-theme="rheinblau"] .event .date { font-family: Inter, sans-serif; font-weight: 800; letter-spacing: -.04em; color: var(--rb-blue); }
+[data-theme="rheinblau"] .event h3 { text-transform: none; }
+[data-theme="rheinblau"] .tag { border-radius: 999px; padding: 6px 12px; text-transform: none; letter-spacing: 0; }
+
+/* Regeln: nummerierte Kacheln */
+[data-theme="rheinblau"] .rules { gap: 16px; }
+[data-theme="rheinblau"] .rule { border: 0; background: #fff; border-radius: 22px; padding: 28px; box-shadow: 0 12px 30px -20px var(--shadow); }
+[data-theme="rheinblau"] .rule::before {
+  content: counter(r); font-family: Inter, sans-serif; font-weight: 800; font-size: 18px;
+  width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--rb-ice); color: var(--rb-blue); margin-bottom: 14px;
+}
+[data-theme="rheinblau"] .rule h3 { text-transform: none; font-size: 20px; }
+
+/* Footer: Navy-Band */
+[data-theme="rheinblau"] footer { background: var(--rb-navy); color: #fff; border: 0; margin-top: 40px; }
+[data-theme="rheinblau"] footer .gh { font-family: Inter, sans-serif; font-weight: 800; letter-spacing: -.05em; text-transform: none; color: #fff; -webkit-text-stroke: 0; }
