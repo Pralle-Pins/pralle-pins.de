@@ -1,0 +1,45 @@
+name: Website bauen & veröffentlichen
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 3 * * *"   # täglich ca. 04:17 Uhr (Winterzeit)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Seite zusammenstellen
+        run: |
+          mkdir _site
+          cp *.html *.svg *.woff2 CNAME _site/
+      - name: Daten aus Baserow holen
+        env:
+          BASEROW_VIEW_KADER: 0QcCdrFjiMroV1gRTGaoJyCVkU_SLBpByu_Yos20WnA
+          BASEROW_VIEW_TERMINE: I8Uy0BCILXgyQuh6PyKJTKgJVvYHprU5Q5ucf5xTRUY
+        run: python3 build_data.py _site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
