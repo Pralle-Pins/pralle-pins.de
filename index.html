@@ -105,6 +105,21 @@
   footer small a{opacity:1}
 
 
+
+  /* NEXT EVENT */
+  .next{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;background:var(--ink);color:var(--paper);padding:40px;margin-bottom:50px;position:relative;overflow:hidden}
+  .next::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:var(--acc);opacity:.25}
+  .next small{font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--acc2);font-size:13px}
+  .next-date{font-family:Anton,sans-serif;font-size:clamp(44px,7vw,84px);line-height:1;margin:10px 0;text-transform:uppercase}
+  .next h3{font-size:24px;font-weight:800;text-transform:uppercase}
+  .next p{opacity:.75;margin-top:6px}
+  .countdown{display:flex;gap:14px;position:relative;z-index:1}
+  .countdown div{background:var(--paper);color:var(--ink);padding:16px 14px;min-width:84px;text-align:center}
+  .countdown b{display:block;font-family:Anton,sans-serif;font-size:44px;line-height:1}
+  .countdown span{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.1em}
+  @media(max-width:800px){.next{grid-template-columns:1fr}}
+  h3.sub{font-family:Anton,sans-serif;font-weight:400;font-size:36px;text-transform:uppercase;margin:0 0 18px}
+
   /* KADER */
   .squad{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:22px;margin-top:40px}
   .jersey{position:relative;aspect-ratio:200/210;transition:.25s}
@@ -203,20 +218,24 @@
 <section id="termine" class="light">
   <div class="wrap">
     <h2 class="reveal">Was <em>ansteht.</em></h2>
-    <div class="events">
+    <div class="next reveal" id="next" hidden>
+      <div class="next-l">
+        <small>Nächster Termin</small>
+        <div class="next-date" id="next-date"></div>
+        <h3 id="next-title"></h3>
+        <p id="next-desc"></p>
+      </div>
+      <div class="countdown" id="countdown" aria-live="polite">
+        <div><b id="cd-d">–</b><span>Tage</span></div>
+        <div><b id="cd-h">–</b><span>Std</span></div>
+        <div><b id="cd-m">–</b><span>Min</span></div>
+      </div>
+    </div>
+    <h3 class="sub reveal" id="hl-title" hidden>Highlights</h3>
+    <div class="events" id="events">
       <div class="event reveal">
         <div class="date"><small>Januar 2027</small>21.–25.</div>
         <div><h3>Skitour Kleinwalsertal</h3><p>Riezlern – Pisten tagsüber, Hüttenzauber abends.</p></div>
-        <span class="tag">Tour</span>
-      </div>
-      <div class="event reveal">
-        <div class="date"><small>Regelmäßig</small>Kegeln</div>
-        <div><h3>Kegelabend</h3><p>Termine und Bahn stimmen wir in der Gruppe ab.</p></div>
-        <span class="tag">Bahn</span>
-      </div>
-      <div class="event reveal">
-        <div class="date"><small>2027</small>Tba</div>
-        <div><h3>Kegeltour</h3><p>Ziel wird noch ausgekegelt.</p></div>
         <span class="tag">Tour</span>
       </div>
     </div>
@@ -246,6 +265,45 @@
   document.getElementById('y').textContent=new Date().getFullYear();
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Daten aus Baserow (per GitHub Action nach data/*.json exportiert)
+  const MON=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+  const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const dt=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+  const today=new Date();today.setHours(0,0,0,0);
+
+  fetch('data/kader.json',{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject()).then(list=>{
+    if(!list.length)return;
+    const sq=document.querySelector('.squad');
+    sq.innerHTML=list.map(p=>`<div class="jersey reveal in"><svg viewBox="0 0 200 210" aria-hidden="true"><path d="M60 8 L20 28 L0 78 L32 92 L40 70 L40 202 L160 202 L160 70 L168 92 L200 78 L180 28 L140 8 Q100 40 60 8Z"/><path class="str" d="M150 18 L150 202 M160 22 L160 202 M140 13 L140 202" /></svg><span class="nr">${esc(p.nummer)}</span><span class="nm">${esc(p.name)}</span></div>`).join('');
+    const c=document.querySelector('#kader .big'); if(c)c.textContent=`${list.length} Kegelbrüder, ein Trikot. Hier sind sie – mit Rückennummer und Kegelnamen.`;
+  }).catch(()=>{});
+
+  fetch('data/termine.json',{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject()).then(list=>{
+    const fut=list.filter(t=>t.von&&dt(t.bis||t.von)>=today).sort((a,b)=>a.von.localeCompare(b.von));
+    const next=fut[0];
+    if(next){
+      const d=dt(next.von);
+      document.getElementById('next').hidden=false;
+      document.getElementById('next-date').textContent=d.toLocaleDateString('de-DE',{weekday:'short',day:'2-digit',month:'2-digit',year:'numeric'});
+      document.getElementById('next-title').textContent=next.titel;
+      document.getElementById('next-desc').textContent=[next.ort,next.beschreibung].filter(Boolean).join(' – ');
+      const target=new Date(d); target.setHours(19,0,0,0);
+      const tick=()=>{let ms=Math.max(0,target-new Date());const D=Math.floor(ms/864e5),H=Math.floor(ms%864e5/36e5),M=Math.floor(ms%36e5/6e4);
+        document.getElementById('cd-d').textContent=D;document.getElementById('cd-h').textContent=H;document.getElementById('cd-m').textContent=M};
+      tick(); setInterval(tick,30000);
+    }
+    // Highlights: Sondertermine (keine regulären Kegelabende), max. 3, plus Termine ohne Datum
+    const hl=fut.filter(t=>t!==next&&t.art!=='Kegelabend').slice(0,3).concat(list.filter(t=>!t.von&&t.art!=='Kegelabend')).slice(0,4);
+    const ev=document.getElementById('events');
+    if(hl.length){
+      document.getElementById('hl-title').hidden=false;
+      ev.innerHTML=hl.map(t=>{let top='Termin folgt',big='Tba';
+        if(t.von){const a=dt(t.von),b=t.bis?dt(t.bis):null;top=MON[a.getMonth()]+' '+a.getFullYear();
+          big=b&&b>a?`${a.getDate()}.–${b.getDate()}.`:`${a.getDate()}.`}
+        return `<div class="event reveal in"><div class="date"><small>${esc(top)}</small>${esc(big)}</div><div><h3>${esc(t.titel)}</h3><p>${esc([t.ort,t.beschreibung].filter(Boolean).join(' – '))}</p></div><span class="tag">${esc(t.art||'Termin')}</span></div>`}).join('');
+    } else ev.innerHTML='';
+  }).catch(()=>{});
 </script>
 </body>
 </html>
