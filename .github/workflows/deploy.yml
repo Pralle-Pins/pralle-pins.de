@@ -25,6 +25,7 @@ jobs:
         run: |
           mkdir _site
           cp *.html *.svg *.woff2 *.css *.js CNAME _site/
+          cp *.jpg _site/ 2>/dev/null || true
       - name: Daten aus Baserow holen
         env:
           BASEROW_VIEW_KADER: 0QcCdrFjiMroV1gRTGaoJyCVkU_SLBpByu_Yos20WnA
