@@ -117,12 +117,13 @@ try{var t=new URLSearchParams(location.search).get('theme')||localStorage.getIte
 <section id="galerie">
   <div class="wrap">
     <h2 class="reveal">Aus dem <em>Archiv.</em></h2>
-    <div class="gallery">
+    <div class="gallery" id="gallery">
       <figure class="shot shot-1 reveal"><img src="galerie-shots.jpg" alt="Tablett mit Schnäpsen und Sahnehaube" loading="lazy"><figcaption><b>Mission 1</b>Die Sahnehauben-Runde</figcaption></figure>
       <figure class="shot shot-2 reveal"><img src="galerie-maske.jpg" alt="Kegelbruder im Trikot trinkt Bier mit Maske über den Augen" loading="lazy"><figcaption><b>Mission 2</b>Blind getrunken</figcaption></figure>
       <figure class="shot shot-3 reveal"><img src="galerie-ski.jpg" alt="Kegelbruder mit Daumen hoch vor verschneiten Bergen" loading="lazy"><figcaption><b>Mission 3</b>Skitour: Daumen hoch</figcaption></figure>
       <figure class="shot shot-4 reveal"><img src="galerie-gipfel.jpg" alt="Zwei Kegelbrüder von hinten vor einem verschneiten Gipfel" loading="lazy"><figcaption><b>Mission 4</b>Gipfelblick mit Rückendeckung</figcaption></figure>
     </div>
+    <p class="gallery-hint">← Wischen für mehr →</p>
   </div>
 </section>
 
@@ -221,6 +222,11 @@ try{var t=new URLSearchParams(location.search).get('theme')||localStorage.getIte
           big=b&&b>a?`${a.getDate()}.–${b.getDate()}.`:`${a.getDate()}.`}
         return `<div class="event reveal in"><div class="date"><small>${esc(top)}</small>${esc(big)}</div><div><h3>${esc(t.titel)}</h3><p>${esc([t.ort,t.beschreibung].filter(Boolean).join(' – '))}</p></div><span class="tag">${esc(t.art||'Termin')}</span></div>`}).join('');
     } else ev.innerHTML='';
+  }).catch(()=>{});
+  // Galerie aus Baserow (per GitHub Action nach data/galerie.json + galerie-*.jpg exportiert)
+  fetch('data/galerie.json',{cache:'no-cache'}).then(r=>r.ok?r.json():Promise.reject()).then(list=>{
+    if(!list.length)return;
+    document.getElementById('gallery').innerHTML=list.map((f,i)=>`<figure class="shot reveal in"><img src="${esc(f.datei)}" alt="${esc(f.beschreibung||f.titel)}" loading="lazy"><figcaption><b>Mission ${i+1}</b>${esc(f.titel)}</figcaption></figure>`).join('');
   }).catch(()=>{});
 </script>
 </body>

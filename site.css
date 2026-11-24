@@ -130,3 +130,12 @@
   .shot img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
   .shot figcaption{padding:12px 4px 0;font-weight:600}
   .shot figcaption b{display:block;font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent-2)}
+  /* Handy: Wisch-Galerie statt bildschirmhoher Fotos */
+  @media(max-width:700px){
+    .gallery{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 24px 18px;margin:28px -24px 0;scrollbar-width:none}
+    .gallery::-webkit-scrollbar{display:none}
+    .gallery .shot{flex:0 0 68%;max-width:280px;scroll-snap-align:center}
+    .gallery .shot img{aspect-ratio:4/5}
+    .gallery-hint{display:block}
+  }
+  .gallery-hint{display:none;font-size:13px;opacity:.6;margin-top:4px}

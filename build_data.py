@@ -7,10 +7,13 @@ import json
 import os
 import sys
 import urllib.request
+import hashlib
+import io
 
 BASE = os.environ.get("BASEROW_URL", "https://db.rhenania-hinsbeck.de")
 VIEW_KADER = os.environ["BASEROW_VIEW_KADER"]
 VIEW_TERMINE = os.environ["BASEROW_VIEW_TERMINE"]
+VIEW_GALERIE = os.environ.get("BASEROW_VIEW_GALERIE")  # optional
 OUT = sys.argv[1] if len(sys.argv) > 1 else "_site"
 
 
@@ -66,4 +69,50 @@ with open(f"{OUT}/data/kader.json", "w", encoding="utf-8") as f:
     json.dump(kader, f, ensure_ascii=False, indent=1)
 with open(f"{OUT}/data/termine.json", "w", encoding="utf-8") as f:
     json.dump(termine, f, ensure_ascii=False, indent=1)
-print(f"Kader: {len(kader)}  Termine: {len(termine)}")
+
+
+# ---------- Galerie: Fotos herunterladen, verkleinern, data/galerie.json ----------
+def bild_speichern(url, ziel_ohne_endung):
+    """Lädt ein Bild, verkleinert es (max. 1100 px, JPEG) und gibt den Dateinamen zurück."""
+    with urllib.request.urlopen(url, timeout=60) as r:
+        roh = r.read()
+    try:
+        from PIL import Image, ImageOps
+        im = ImageOps.exif_transpose(Image.open(io.BytesIO(roh))).convert("RGB")
+        im.thumbnail((1100, 1100))
+        im.save(ziel_ohne_endung + ".jpg", "JPEG", quality=80, optimize=True, progressive=True)
+        return ziel_ohne_endung + ".jpg"
+    except ImportError:
+        endung = os.path.splitext(url.split("?")[0])[1].lower() or ".jpg"
+        with open(ziel_ohne_endung + endung, "wb") as f:
+            f.write(roh)
+        return ziel_ohne_endung + endung
+
+
+galerie = []
+if VIEW_GALERIE:
+    os.makedirs(f"{OUT}/galerie", exist_ok=True)
+    zeilen = public_rows(VIEW_GALERIE)
+    zeilen.sort(key=lambda r: (r.get("Reihenfolge") in (None, ""), float(r.get("Reihenfolge") or 0)))
+    for r in zeilen:
+        if r.get("Öffentlich") is False:
+            continue
+        fotos = r.get("Foto") or []
+        if not fotos or not fotos[0].get("url"):
+            continue
+        url = fotos[0]["url"]
+        name = "galerie/" + hashlib.sha1(url.encode()).hexdigest()[:12]
+        try:
+            datei = bild_speichern(url, f"{OUT}/{name}")
+        except Exception as e:  # ein kaputtes Bild soll den Build nicht stoppen
+            print(f"Bild übersprungen ({r.get('Titel')}): {e}")
+            continue
+        galerie.append({
+            "titel": (r.get("Titel") or "").strip(),
+            "beschreibung": (r.get("Beschreibung") or "").strip(),
+            "datei": os.path.relpath(datei, OUT),
+        })
+    with open(f"{OUT}/data/galerie.json", "w", encoding="utf-8") as f:
+        json.dump(galerie, f, ensure_ascii=False, indent=1)
+
+print(f"Kader: {len(kader)}  Termine: {len(termine)}  Galerie: {len(galerie)}")
